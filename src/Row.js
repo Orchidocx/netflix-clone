@@ -14,14 +14,13 @@ function Row({title, fetchUrl}) {
     fetchData();
   }, [fetchUrl]);
 
-  console.table(movies);
   return (
     <div className='row'>
       <h2>{title}</h2>
 
       <div className="row__posters">
         {movies.map(movie => (
-          <img className='row__poster' src={`${BASE_URL}${movie.poster_path}`} alt={movie.name}/>
+          <img key={movie.id} className='row__poster' src={`${BASE_URL}${movie.poster_path}`} alt={movie.name}/>
         ))}
       </div>
     </div>
