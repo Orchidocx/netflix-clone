@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from './axios';
 import requests from './requests';
+import './Banner.css';
 const BASE_URL = 'https://image.tmdb.org/t/p/original/';
 function Banner() {
   const [movie, setMovie] = useState([]);
-
+  const truncate = (str, n) => (str?.length > n ? `${str.substr(0, n-1)}...` : str)
   useEffect(() => {
     async function fetchData() {
       const request = await axios.get(requests.fetchNetflixOriginals);
@@ -15,8 +16,6 @@ function Banner() {
     }
     fetchData();
   }, []);
-
-  console.log(movie);
   return (
     <header className='banner'
       style={{
@@ -26,17 +25,20 @@ function Banner() {
       }}
     >
       <div className='banner__contents'>
-        <h1>
+        <h1 className='banner__title'>
           {movie?.title || movie?.name || movie?.original_name}
         </h1>
+
+        <div className="banner__buttons">
+          <button className="banner__button">Play</button>
+          <button className="banner__button">My List</button>
+        </div>
+
+        <h1 className="banner__description">
+          {truncate(movie?.overview, 150)}
+        </h1>
       </div>
-      <div className="banner__buttons">
-        <button className="banner__button">Play</button>
-        <button className="banner__button">My List</button>
-      </div>
-      <h1 className="banner__description">
-        {movie?.overview}
-      </h1>
+      
     </header>
   )
 }
