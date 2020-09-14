@@ -5,7 +5,8 @@ import Row from './Row';
 function App() {
   return (
     <div className="App">
-      <Row/>
+      <Row title='Netflix Originals'/>
+      <Row title='Trending'/>
     </div>
   );
 }
